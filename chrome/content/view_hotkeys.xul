@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- Copyright 2014 FSharpN00b.
+This file is part of Bookmark Sorter.
+
+Bookmark Sorter is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Bookmark Sorter is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Bookmark Sorter.  If not, see <http://www.gnu.org/licenses/>. -->
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  id="BookmarkSorter_view_hotkeys"
+  title="View All Keyboard Shortcuts"
+  buttons="accept,cancel"
+  onload="load_handler ();"
+  ondialogaccept="return accept ();"
+  >
+  <script type="application/x-javascript" src="view_hotkeys.js" />
+  <listbox id="keyboard_shortcuts" width="400">
+    <listhead>
+      <listheader label="Keyboard Shortcut" />
+      <listheader label="Bookmark Folder Path" />
+    </listhead>
+    <listcols>
+      <listcol />
+      <listcol flex="1" />
+    </listcols>
+  </listbox>
+  <hbox pack="end">
+    <button label="Delete" oncommand="delete_click_handler ();" />
+    <button label="Delete All" oncommand="delete_all_click_handler ();" />
+  </hbox>
+</dialog>

@@ -1,0 +1,6 @@
+content     bookmarksorter    chrome/content/
+overlay chrome://browser/content/browser.xul chrome://bookmarksorter/content/overlay.xul
+
+skin bookmarksorter classic/1.0 skin/classic/
+style chrome://browser/content/browser.xul chrome://bookmarksorter/skin/overlay.css
+style chrome://global/content/customizeToolbar.xul chrome://bookmarksorter/skin/overlay.css

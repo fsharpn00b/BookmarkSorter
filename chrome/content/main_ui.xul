@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!-- Copyright 2014 FSharpN00b.
+This file is part of Bookmark Sorter.
+
+Bookmark Sorter is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Bookmark Sorter is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Bookmark Sorter.  If not, see <http://www.gnu.org/licenses/>. -->
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<!--See:
+https://developer.mozilla.org/en-US/docs/Skinning_XUL_Files_by_Hand
+-->
+<?xml-stylesheet href="main_ui.css" type="text/css"?>
+<!-- See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/window
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/XUL_controls
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/tree
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/Element_Positioning
+https://developer.mozilla.org/en-US/Add-ons/Overlay_Extensions/Firefox_addons_developer_guide/Introduction_to_XUL%E2%80%94How_to_build_a_more_intuitive_UI
+-->
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="Bookmark Sorter"
+	buttons=""
+	onload="load_handler ();"
+	onclose="close_handler (event);"
+	onunload="unload_handler ();"
+	>
+	<script type="application/x-javascript" src="main_ui.js" />
+	<popupset>
+    <menupopup id="tab_groups_context_menu">
+      <menuitem label="Add Keyboard Shortcut" oncommand="add_keyboard_shortcut_handler ();" />
+      <menuitem label="View All Keyboard Shortcuts" oncommand="view_keyboard_shortcuts_handler ();" />
+    </menupopup>
+		<menupopup id="tabs_tree_context_menu" />
+	</popupset>
+<!-- Note.
+The pack attribute is for the same axis as the box (i.e. it is horizontal for an hbox, vertical for a vbox).
+The align attribute is for the opposite axis as the box.
+For an element to be flexible, its container must be flexible.
+See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/Element_Positioning
+-->
+	<hbox flex="1" >
+    <vbox flex="1">
+<!-- The default seltype value is "single". -->
+      <listbox id="tab_groups" flex="1" context="tab_groups_context_menu" onselect="tab_group_select_handler ();" />
+      <hbox align="center">
+        <label value="Search: " />
+        <textbox id="tab_search_text" flex="1" />
+      </hbox>
+      <checkbox id="tab_search_is_regex" label="Regular expression" />
+      <checkbox id="tab_search_match_case" label="Match case" />
+      <checkbox id="tab_search_match_title" label="Match title" checked="true" />
+      <checkbox id="tab_search_match_url" label="Match URL" checked="true" />
+      <button label="Search" oncommand="tab_search_click_handler ();" />
+    </vbox>
+    <splitter collapse="before">
+      <grippy />
+    </splitter>
+		<vbox flex="1">
+<!-- The default seltype value is "multiple". -->
+			<tree id="tabs_tree" flex="1" context="tabs_tree_context_menu" onselect="tab_select_handler ();" onmousemove="tab_mouse_move_handler (event);" ondblclick="tab_mouse_double_click_handler (event);" onkeydown="tab_key_down_handler (event);">
+				<treecols>
+<!-- The default column type is text. -->
+					<treecol label="Tab" flex="1" ignoreincolumnpicker="true" />
+          <splitter resizebefore="closest" />
+          <treecol label="Override" />
+          <splitter resizebefore="closest" />
+					<treecol label="Destination" ignoreincolumnpicker="true" />
+				</treecols>
+        <treechildren id="tab_rows" />
+			</tree>
+      <hbox align="center">
+        <label value="Destination: " />
+        <!--
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/Manipulating_Lists
+"[M]enulists do not fire the select event; instead you can listen to the command event to handle when an item is selected."
+-->
+        <menulist id="tab_destination" flex="1" oncommand="tab_destination_select_handler ();">
+          <menupopup />
+        </menulist>
+      </hbox>
+		</vbox>
+    <splitter collapse="after">
+      <grippy />
+    </splitter>
+		<vbox flex="1">
+<!-- The default seltype value is "multiple". -->
+			<tree id="rules_tree" seltype="single" flex="1" onselect="rule_select_handler ();">
+				<treecols>
+					<treecol label="Rule" flex="1" ignoreincolumnpicker="true" />
+          <splitter resizebefore="closest" />
+          <treecol label="Regex" />
+          <splitter resizebefore="closest" />
+          <treecol label="Case" />
+          <splitter resizebefore="closest" />
+          <treecol label="Title" />
+          <splitter resizebefore="closest" />
+          <treecol label="URL" />
+          <splitter resizebefore="closest" />
+					<treecol label="Destination" ignoreincolumnpicker="true" />
+				</treecols>
+				<treechildren id="rule_rows" />
+			</tree>
+      <hbox align="center">
+        <label value="Rule: " />
+<!-- Previously we let the user edit the rule text in the tree, but that caused two problems. (1) We could not prevent the user from editing the rule destination. (2) We could not detect when the rule text had changed. -->
+        <textbox id="rule_text" flex="1" />
+        <label value="Destination: " />
+        <menulist id="rule_destination" oncommand="rule_destination_select_handler ();">
+          <menupopup />
+        </menulist>
+      </hbox>
+      <hbox align="center">
+        <checkbox id="rule_is_regex" label="Regular expression" />
+        <checkbox id="rule_match_case" label="Match case" />
+        <checkbox id="rule_match_title" label="Match title" checked="true" />
+        <checkbox id="rule_match_url" label="Match URL" checked="true" />
+      </hbox>
+<!-- For some reason, we can make these buttons flexible without making the container flexible. In fact, if we do, the hbox flexes vertically, which is not what we want. -->
+      <hbox>
+        <button label="Add" flex="1" oncommand="add_rule_click_handler ();" />
+        <button label="Save" flex="1" oncommand="save_rule_click_handler ();" />
+        <button label="Delete" flex="1" oncommand="delete_rule_click_handler ();" />
+        <button label="Up" flex="1" oncommand="move_rule_up_click_handler ();" />
+        <button label="Down" flex="1" oncommand="move_rule_down_click_handler ();" />
+      </hbox>
+      <hbox>
+        <button label="Load Ruleset" flex="1" oncommand="load_ruleset_click_handler ();" />
+        <button label="Save Ruleset" flex="1" oncommand="save_ruleset_click_handler ();" />
+        <button label="Preferences" flex="1" oncommand="preferences_click_handler ();" />
+        <button style="font-weight: bold" label="Sort" flex="1" oncommand="move_click_handler ();" />
+      </hbox>
+		</vbox>
+	</hbox>
+</window>

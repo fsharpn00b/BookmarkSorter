@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- Copyright 2014 FSharpN00b.
+This file is part of BookmarkSorter.
+
+BookmarkSorter is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+BookmarkSorter is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with BookmarkSorter.  If not, see <http://www.gnu.org/licenses/>. -->
+
+<!-- See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Toolbars/Custom_toolbar_button
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/toolbarbutton
+-->
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<!--Note we can also access the modules included by main.js, such as Commands. -->
+	<script type="application/javascript" src="chrome://bookmarksorter/content/main.js"/>
+	<toolbarpalette id="BrowserToolbarPalette">
+<!-- See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/PopupGuide/OpenClose
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Method/openPopup
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/PopupGuide/Positioning
+
+We could also use:
+type="menu-button"
+and no oncommand attribute, but that makes the button wider by adding the down arrow symbol, which we don't like.
+
+It seems document.getElementById can only find either (1) the containing element (in this case, btnExport) or a subelement. For example, if I try to find an element outside btnExport, getElementById returns null. However, that might be because the element was not rendered.
+-->
+		<toolbarbutton
+			id="BookmarkSorter_button"
+			class="toolbarbutton-1 chromeclass-toolbar-additional custombutton"
+			oncommand="BookmarkSorter.Main.run ();"
+			label="Bookmark Sorter"
+			tooltiptext="Bookmark Sorter"
+		/>
+	</toolbarpalette>
+</overlay>

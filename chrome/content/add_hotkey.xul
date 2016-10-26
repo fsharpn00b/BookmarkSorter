@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- Copyright 2014 FSharpN00b.
+This file is part of Bookmark Sorter.
+
+Bookmark Sorter is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Bookmark Sorter is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Bookmark Sorter.  If not, see <http://www.gnu.org/licenses/>. -->
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  title="Add Keyboard Shortcut"
+  buttons="accept,cancel"
+  ondialogaccept="return accept ();"
+  >
+  <script type="application/x-javascript" src="add_hotkey.js" />
+  <label value="Please press the key to use as a keyboard shortcut. We recommend using alphanumeric keys only." />
+  <label value="We do not capture the Esc, Tab, Enter, Shift, Control, Alt, Fn, Win, Command, or Meta keys, as that might interfere with the normal behavior of your user interface." />
+  <label value="We also do not recommend using any other non-alphanumeric keys, as the behavior might be inconsistent." />
+  <separator orient="horizontal" />
+  <hbox>
+    <label value="Key: " />
+    <textbox id="key" onkeyup="key_up_handler (event);" />
+  </hbox>
+</dialog>

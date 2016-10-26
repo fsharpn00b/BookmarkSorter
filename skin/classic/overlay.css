@@ -1,0 +1,7 @@
+#BookmarkSorter_button {
+	list-style-image: url(chrome://bookmarksorter/skin/icon.png);
+}
+
+toolbar[iconsize="small"] #BookmarkSorter_button {
+	list-style-image: url(chrome://bookmarksorter/skin/icon_small.png);
+}

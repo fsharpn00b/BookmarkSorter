@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!-- Copyright 2014 FSharpN00b.
+This file is part of Bookmark Sorter.
+
+Bookmark Sorter is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Bookmark Sorter is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Bookmark Sorter.  If not, see <http://www.gnu.org/licenses/>. -->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!-- Validation results included the following.
+<prefwindow> elements must have IDs.
+Warning: <prefwindow> elements without id attributes cause errors to be reported in the error console and prevent persistence of certain properties of the dialog. -->
+<prefwindow
+    id="BookmarkSorter_prefWindow"
+    title="Bookmark Sorter Preferences"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    >
+<!-- See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/prefpane
+"Note that when using multiple prefpanes in the same prefwindow, you must not put the <script> elements above the prefpane elements, but instead below them."
+Previously, we used multiple prefpanes. We are keeping this here as a reference in case we do so again.
+-->
+<!-- Note if you use multiple prefpanes, they do not work correctly without IDs.
+Previously, we used multiple prefpanes. We are keeping this here as a reference in case we do so again. -->
+  <prefpane id="BookmarkSorter_pref_pane_1" label="General">
+		<preferences>
+			<preference id="BookmarkSorter_prefs_font_size"
+                  name="extensions.{4966CF83-C4AF-4606-80FE-0BAA4552317B}.font_size" type="int" />
+      <preference id="BookmarkSorter_prefs_default_background_color"
+                  name="extensions.{4966CF83-C4AF-4606-80FE-0BAA4552317B}.default_background_color" type="string" />
+      <preference id="BookmarkSorter_prefs_default_foreground_color"
+                  name="extensions.{4966CF83-C4AF-4606-80FE-0BAA4552317B}.default_foreground_color" type="string" />
+      <preference id="BookmarkSorter_prefs_hover_background_color"
+                  name="extensions.{4966CF83-C4AF-4606-80FE-0BAA4552317B}.hover_background_color" type="string" />
+      <preference id="BookmarkSorter_prefs_hover_foreground_color"
+                  name="extensions.{4966CF83-C4AF-4606-80FE-0BAA4552317B}.hover_foreground_color" type="string" />
+      <preference id="BookmarkSorter_prefs_selected_background_color"
+                  name="extensions.{4966CF83-C4AF-4606-80FE-0BAA4552317B}.selected_background_color" type="string" />
+      <preference id="BookmarkSorter_prefs_selected_foreground_color"
+                  name="extensions.{4966CF83-C4AF-4606-80FE-0BAA4552317B}.selected_foreground_color" type="string" />
+      <preference id="BookmarkSorter_prefs_log_moved_tabs"
+                  name="extensions.{4966CF83-C4AF-4606-80FE-0BAA4552317B}.log_moved_tabs" type="bool" />
+    </preferences>
+
+    <groupbox>
+      <caption label="Display" />
+<!-- Note.
+The pack attribute is for the same axis as the box (i.e. it is horizontal for an hbox, vertical for a vbox).
+The align attribute is for the opposite axis as the box.
+For an element to be flexible, its container must be flexible.
+See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/Element_Positioning
+-->
+      <hbox align="center">
+        <label value="Font Size"/>
+        <menulist preference="BookmarkSorter_prefs_font_size">
+          <menupopup>
+            <menuitem value="10" label="10" />
+            <menuitem value="11" label="11" />
+            <menuitem value="12" label="12" />
+            <menuitem value="13" label="13" />
+            <menuitem value="14" label="14" />
+            <menuitem value="15" label="15" />
+            <menuitem value="16" label="16" />
+            <menuitem value="17" label="17" />
+            <menuitem value="18" label="18" />
+            <menuitem value="19" label="19" />
+            <menuitem value="20" label="20" />
+          </menupopup>
+        </menulist>
+      </hbox>
+      <separator orient="horizontal" />
+<!--The column and row elements are supposed to have align and pack attributes, but for some reason they do not work. So to align the contents of a cell, we enclose them in an hbox element.-->
+      <grid>
+        <columns>
+          <column />
+          <column />
+          <column />
+        </columns>
+        <rows>
+          <row>
+            <hbox pack="center">
+              <label value="Element" />  
+            </hbox>
+            <hbox pack="center">
+              <label value="Background Color" />
+            </hbox>
+            <hbox pack="center">
+              <label value="Foreground Color" />
+            </hbox>
+          </row>
+          <row>
+            <hbox pack="end">
+              <label value="Default" />
+            </hbox>
+            <hbox pack="center">
+              <colorpicker id="BookmarkSorter_default_background_color" preference="BookmarkSorter_prefs_default_background_color" type="button" />
+            </hbox>
+            <hbox pack="center">
+              <colorpicker id="BookmarkSorter_default_foreground_color" preference="BookmarkSorter_prefs_default_foreground_color" type="button" />
+            </hbox>
+          </row>
+          <row>
+            <hbox pack="end">
+              <label value="Hover" />
+            </hbox>
+            <hbox pack="center">
+              <colorpicker id="BookmarkSorter_hover_background_color" preference="BookmarkSorter_prefs_hover_background_color" type="button" />
+            </hbox>
+            <hbox pack="center">
+              <colorpicker id="BookmarkSorter_hover_foreground_color" preference="BookmarkSorter_prefs_hover_foreground_color" type="button" />
+            </hbox>
+          </row>
+          <row>
+            <hbox pack="end">
+              <label value="Selected" />
+            </hbox>
+            <hbox pack="center">
+              <colorpicker id="BookmarkSorter_selected_background_color" preference="BookmarkSorter_prefs_selected_background_color" type="button" />
+            </hbox>
+            <hbox pack="center">
+              <colorpicker id="BookmarkSorter_selected_foreground_color" preference="BookmarkSorter_prefs_selected_foreground_color" type="button" />
+            </hbox>
+          </row>
+<!--
+          <row>
+            <label value="Tabs that Match Selected Rule" />
+            <colorpicker type="button" />
+            <colorpicker type="button" />
+          </row>
+          <row>
+            <label value="Tabs with Exceptions" />
+            <colorpicker type="button" />
+            <colorpicker type="button" />
+          </row>
+          <row>
+            <label value="Rules that Match Selected Tabs" />
+            <colorpicker type="button" />
+            <colorpicker type="button" />
+          </row>
+-->
+          <row>
+<!--Fill the first two columns with empty labels.-->
+            <label />
+            <label />
+            <hbox pack="center">
+              <button label="Reset Colors" onclick="reset_click_handler ();" />
+            </hbox>
+          </row>
+        </rows>
+      </grid>
+    </groupbox>
+    <groupbox>
+      <caption label="Logging" />
+      <checkbox preference="BookmarkSorter_prefs_log_moved_tabs"
+          label="Log moved bookmarks to the browser console" />
+<!--Without this separator, the lower part of the checkbox is cut off.-->
+      <separator orient="horizontal" />
+    </groupbox>
+	</prefpane>
+<!-- See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/prefpane
+"Note that when using multiple prefpanes in the same prefwindow, you must not put the <script> elements above the prefpane elements, but instead below them."
+Previously, we used multiple prefpanes. We are keeping this here as a reference in case we do so again.
+-->
+  <script type ="application/x-javascript" src="preferences.js" />
+</prefwindow>

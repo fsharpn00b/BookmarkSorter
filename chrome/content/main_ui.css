@@ -1,0 +1,78 @@
+/* See:
+http://www.w3schools.com/css/css_syntax.asp
+*/
+/* This seems to include button[label] and menulist[label]. */
+/* 0. The CSS rule for a label. */
+label {
+}
+/* 1. The CSS rule for a textbox. */
+textbox {
+}
+/* 2. The CSS rule for a checkbox. */
+checkbox {
+}
+/* 3. The CSS rule for a list item. */
+listitem {
+}
+/* 4. The CSS rule for a selected list item. */
+listitem[selected] {
+}
+/* 5. The CSS rule for a menu item. */
+menuitem {
+}
+/* See:
+https://developer.mozilla.org/en-US/docs/Web/CSS/:hover
+*/
+/* 6. The CSS rule for a menu item the user hovers over. */
+menuitem:hover {
+}
+/* 7. The CSS rule for a selected menu item. */
+menuitem[selected] {
+}
+/* We declare this separately from label because we also want to set the foreground and background color here. */
+/* 8. The CSS rule for a menu list label. */
+menulist[label] {
+}
+/* 9. The CSS rule for a tree. */
+tree {
+}
+/* 10. The CSS rule for a treechildren element. */
+treechildren {
+}
+/* See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/Styling_a_Tree
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Template_Guide/Building_Trees
+*/
+/* 11. The CSS rule for a tree row. */
+treechildren::-moz-tree-row {
+}
+/* Mozilla CSS extensions have a different syntax for accessing properties. [property_name] does not work. */
+/* 12. The CSS rule for a tree row the user hovers over. */
+treechildren::-moz-tree-row(hover) {
+}
+/* 13. The CSS rule for a selected tree row. */
+treechildren::-moz-tree-row(selected) {
+}
+/* 14. The CSS rule for a selected tree row that the user hovers over. */
+treechildren::-moz-tree-row(hover, selected) {
+}
+/* 15. The CSS rule for a tree cell of type text. */
+treechildren::-moz-tree-cell-text {
+}
+/* 16. The CSS rule for a tree cell of type text the user hovers over. */
+treechildren::-moz-tree-cell-text(hover) {
+}
+/* 17. The CSS rule for a selected tree cell of type text. */
+treechildren::-moz-tree-cell-text(selected) {
+}
+/* 18. The CSS rule for a selected tree cell of type text that the user hovers over. */
+treechildren::-moz-tree-cell-text(hover, selected) {
+}
+/* See:
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/Styling_a_Tree (Setting Properties)
+*/
+/*
+treechildren::-moz-tree-cell-text(<property name here>) {
+    color: red;
+}
+*/
